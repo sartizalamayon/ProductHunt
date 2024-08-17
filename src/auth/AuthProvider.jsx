@@ -1,7 +1,6 @@
 import { createContext, useState, useEffect } from "react";
-import { createUserWithEmailAndPassword, updateProfile , signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut} from "firebase/auth";
+import { createUserWithEmailAndPassword , signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut} from "firebase/auth";
 import PropTypes from "prop-types";
-//import useAxiosPublic from "../hooks/useAxiosPublic";
 import auth from "../firebase/firebase.config";
 
 
@@ -11,7 +10,6 @@ export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    //const axiosPublic = useAxiosPublic();
 
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, (currentUser) =>{
@@ -36,16 +34,12 @@ const AuthProvider = ({ children }) => {
         return signInWithEmailAndPassword(auth, email, password)
       };
 
-      const GoogleProvider = new GoogleAuthProvider();
+    const GoogleProvider = new GoogleAuthProvider();
 
     const logInWithGoogle = () => {
         setLoading(true);
         return signInWithPopup(auth, GoogleProvider)
     };
-
-    const profileUpdate = (obj) => {
-        return updateProfile(auth.currentUser, obj)
-      };
 
     const logOut = () => {
         setLoading(true);
@@ -65,7 +59,6 @@ return (
         logInWithEmailPass,
         logInWithGoogle,
         logOut,
-        profileUpdate
         }}>
       {children}
     </AuthContext.Provider>
