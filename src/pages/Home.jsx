@@ -36,11 +36,26 @@ const Home = () => {
     fetchProducts();
   }, [search, brand, category, priceRange, sort, page]);
 
-  const handleSearchChange = (e) => setSearch(e.target.value);
-  const handleBrandChange = (e) => setBrand(e.target.value);
-  const handleCategoryChange = (e) => setCategory(e.target.value);
-  const handlePriceRangeChange = (e) => setPriceRange(e.target.value);
-  const handleSortChange = (e) => setSort(e.target.value);
+  const handleSearchChange = (e) => {
+    setSearch(e.target.value)
+    setPage(1)
+    };
+  const handleBrandChange = (e) => {
+    setBrand(e.target.value)
+    setPage(1)
+  };
+  const handleCategoryChange = (e) => {
+    setCategory(e.target.value)
+    setPage(1)
+};
+  const handlePriceRangeChange = (e) => {
+    setPriceRange(e.target.value)
+    setPage(1)
+  };
+  const handleSortChange = (e) => {
+    setSort(e.target.value)
+    setPage(1)
+  };
   const handlePageChange = (newPage) => setPage(newPage);
 
   return (
@@ -114,7 +129,7 @@ const Home = () => {
                     <FaStar key={index} className={`h-5 w-5 ${index < product.rating ? 'text-yellow-500' : 'text-gray-300'}`} />
                   ))}
                 </div>
-                <p className="text-sm text-gray-500">{product.category} - {product.brand}</p>
+                <p className="text-sm text-gray-500">{product.category} - {product.brand?product.brand:'No brand info'}</p>
                 <p className="text-sm text-gray-600 mt-2">
                   {product.description.length > 80 ? `${product.description.substring(0, 80)}...` : product.description}
                 </p>
