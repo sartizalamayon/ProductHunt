@@ -10,10 +10,25 @@ const Home = () => {
   const [sort, setSort] = useState('');
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+const catagories = [
+    'beauty',
+    'fragrances',
+    'furniture',
+    'groceries',
+    'home-decoration',
+    'kitchen-accessories'
+  ]
 
+const brands=['Essence',          'Glamour Beauty',
+  'Velvet Touch',     'Chic Cosmetics',
+  'Nail Couture',     'Calvin Klein',
+  'Chanel',           'Dior',
+  'Dolce & Gabbana',  'Gucci',
+  'Annibale Colombo', 'Furniture Co.',
+  'Knoll',            'Bath Trends',]
   useEffect(() => {
     const fetchProducts = async () => {
-      const response = await axios.get('http://localhost:3000/products', {
+      const response = await axios.get('https://product-hunt-server-sable.vercel.app/products', {
         params: {
           search,
           brand,
@@ -43,15 +58,15 @@ const Home = () => {
         <input type="text" placeholder="Search by name" value={search} onChange={handleSearchChange} />
         <select value={brand} onChange={handleBrandChange}>
           <option value="">Select Brand</option>
-          <option value="Essence">Essence</option>
-          <option value="BrandX">BrandX</option>
-          {/* Add more brands as needed */}
+          {brands.map((br, idx)=>{
+            return <option key={idx} value={br}>{br}</option>
+          })}
         </select>
         <select value={category} onChange={handleCategoryChange}>
           <option value="">Select Category</option>
-          <option value="beauty">Beauty</option>
-          <option value="electronics">Electronics</option>
-          {/* Add more categories as needed */}
+          {catagories.map((cat, idx)=>{
+            return <option key={idx} value={cat}>{cat}</option>
+          })}
         </select>
         <select value={priceRange} onChange={handlePriceRangeChange}>
           <option value="">Select Price Range</option>
